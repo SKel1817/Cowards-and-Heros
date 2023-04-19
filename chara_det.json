@@ -1,0 +1,10 @@
+{
+    "name": "Cool Dude",
+    "race": "Dwarf",
+    "Strength": "2",
+    "Intellegence": "1",
+    "Charasma": "4",
+    "dexetrity": "3",
+    "Constitution": 0,
+    "Health": 15
+}
