@@ -1,10 +1,10 @@
 {
-    "name": "Cool Dude",
+    "name": "Gerth",
     "race": "Dwarf",
-    "Strength": "2",
-    "Intellegence": "1",
-    "Charasma": "4",
-    "dexetrity": "3",
-    "Constitution": 0,
+    "Strength": "0",
+    "Intellegence": "0",
+    "Charasma": "8",
+    "dexetrity": "1",
+    "Constitution": "0",
     "Health": 15
 }

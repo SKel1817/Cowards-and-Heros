@@ -53,3 +53,17 @@ Cool Dude turn:failed hit #1 you failed to hit the enemy, it's health is 22
 Enemy turn:failed hit #1 the enemy failed to hit you, it's health is22
 Cool Dude turn:Successful hit #1 you hit the enemy 16
 Enemy turn:failed hit #1 the enemy failed to hit you, it's health is16
+
+-------Start of Game-------
+Gerth turn:failed hit #1 you failed to hit the enemy, it's health is 25
+Enemy turn:Successful hit #1 the enemy hit you, your remaing health is9
+Gerth turn:Successful hit #1 you hit the enemy 21
+Enemy turn:Successful hit #1 the enemy hit you, your remaing health is8
+Gerth turn:failed hit #1 you failed to hit the enemy, it's health is 21
+Enemy turn:failed hit #1 the enemy failed to hit you, it's health is21
+Gerth turn:failed hit #1 you failed to hit the enemy, it's health is 21
+Enemy turn:Successful hit #1 the enemy hit you, your remaing health is4
+Gerth turn:Successful hit #1 you hit the enemy 20
+Enemy turn:Successful hit #1 the enemy hit you, your remaing health is-2
+Gerth turn:failed hit #1 you failed to hit the enemy, it's health is 20
+Enemy turn:failed hit #1 the enemy failed to hit you, it's health is20
