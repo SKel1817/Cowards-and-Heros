@@ -67,3 +67,15 @@ Gerth turn:Successful hit #1 you hit the enemy 20
 Enemy turn:Successful hit #1 the enemy hit you, your remaing health is-2
 Gerth turn:failed hit #1 you failed to hit the enemy, it's health is 20
 Enemy turn:failed hit #1 the enemy failed to hit you, it's health is20
+
+-------Start of Game-------
+Test turn:failed hit #1 you failed to hit the enemy, it's health is 25
+Enemy turn:failed hit #1 the enemy failed to hit you, it's health is25
+
+-------Start of Game-------
+John turn:Successful hit #1 you hit the enemy 19
+Enemy turn:Successful hit #1 the enemy hit you, your remaing health is9
+John turn:Successful hit #1 you hit the enemy 15
+Enemy turn:Successful hit #1 the enemy hit you, your remaing health is3
+John turn:failed hit #1 you failed to hit the enemy, it's health is 15
+Enemy turn:Successful hit #1 the enemy hit you, your remaing health is-3

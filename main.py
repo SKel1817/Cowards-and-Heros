@@ -89,7 +89,19 @@ if response == "attack":
         roll = char_funcs.d20()
         enemyTurn(roll)
         sleep(3)
-        break
+        #check enemy and player health
+        if enemy['Health'] <= 0:
+            print("You have defeated the enemy")
+            with open('save.txt', 'a') as f:
+                f.write("----you have defeated the enemy----\n")
+            break
+        elif chara_det['Health'] <= 0:
+            print("You have died")
+            with open('save.txt', 'a') as f:
+                f.write("----You have died----\n")
+            break
+        else:
+            continue
     #update health in json file
     with open('chara_det.json', 'w') as fp:
         json.dump(chara_det["Health"], fp, indent=4, separators=(',', ': '))
