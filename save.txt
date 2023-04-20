@@ -79,3 +79,16 @@ John turn:Successful hit #1 you hit the enemy 15
 Enemy turn:Successful hit #1 the enemy hit you, your remaing health is3
 John turn:failed hit #1 you failed to hit the enemy, it's health is 15
 Enemy turn:Successful hit #1 the enemy hit you, your remaing health is-3
+
+-------Start of Game-------
+Amy turn:Successful hit, you hit the enemy 19
+Enemy turn:Successful hit, the enemy hit you, your remaing health is11
+Amy turn:failed hit, you failed to hit the enemy, it's health is 19
+Enemy turn:failed hit, the enemy failed to hit you, it's health is19
+Amy turn:failed hit, you failed to hit the enemy, it's health is 19
+Enemy turn:Successful hit, the enemy hit you, your remaing health is5
+Amy turn:Successful hit, you hit the enemy 15
+Enemy turn:Successful hit, the enemy hit you, your remaing health is4
+Amy turn:Successful hit, you hit the enemy 9
+Enemy turn:Successful hit, the enemy hit you, your remaing health is-1
+----You have died----

@@ -39,20 +39,18 @@ def playerTurn(roll):
         damage = char_funcs.d6()
         enemy['Health'] = enemy['Health'] - damage
         print("The enemy has " + str(enemy['Health']) + " health remaining")
-        counter += 1
         #write this to a txt so it can be accessed as a save point for user
         with open('save.txt', 'a') as f:
             f.write(str(chara_det['name']) + " turn:")
-            f.write("Successful hit #" + str(counter) + " you hit the enemy " + str(enemy['Health']))
+            f.write("Successful hit, you hit the enemy " + str(enemy['Health']))
             f.write("\n")
     else:
         print("you missed")
         print("you, " + str(chara_det['name']) + " have " + str(chara_det['Health']) + " health")
-        counter += 1
         #write this to a txt so it can be accessed as a save point for user
         with open('save.txt', 'a') as f:
             f.write(str(chara_det['name']) + " turn:")
-            f.write("failed hit #" + str(counter) + " you failed to hit the enemy, it's health is " + str(enemy['Health']))
+            f.write("failed hit, you failed to hit the enemy, it's health is " + str(enemy['Health']))
             f.write("\n")
 def enemyTurn(roll):
     print("\n-----ENEMY TURN-----")
@@ -62,11 +60,10 @@ def enemyTurn(roll):
         damage = char_funcs.d6()
         chara_det['Health'] = chara_det['Health'] - damage
         print("you, " + str(chara_det['name']) + " have " + str(chara_det['Health']) + " health remaining")
-        counter += 1
         #write this to a txt so it can be accessed as a save point for user
         with open('save.txt', 'a') as f:
             f.write("Enemy turn:")
-            f.write("Successful hit #" + str(counter) + " the enemy hit you, your remaing health is" + str(chara_det['Health']))
+            f.write("Successful hit, the enemy hit you, your remaing health is" + str(chara_det['Health']))
             f.write("\n")
     else:
         print("the enemy missed")
@@ -75,12 +72,12 @@ def enemyTurn(roll):
         #write this to a txt so it can be accessed as a save point for user
         with open('save.txt', 'a') as f:
             f.write("Enemy turn:")
-            f.write("failed hit #" + str(counter) + " the enemy failed to hit you, it's health is" + str(enemy['Health']))
+            f.write("failed hit, the enemy failed to hit you, it's health is" + str(enemy['Health']))
             f.write("\n")
 
 print("you are now in combat (congrats)")
 print("you have " + str(stats['Health']) + " health")
-response = input("What do you want to do? ")
+response = input("What do you want to do? [attack or flee]").lower()
 if response == "attack":
     while enemy['Health'] >= 0 or chara_det['Health'] >= 0:
         roll = char_funcs.d20()
@@ -102,9 +99,15 @@ if response == "attack":
             break
         else:
             continue
+elif response == "flee":
+    print("you have fled")
+    with open('save.txt', 'a') as f:
+        f.write("----you have fled----\n")
+else:
+    print("Invalid response, get good")
     #update health in json file
-    with open('chara_det.json', 'w') as fp:
-        json.dump(chara_det["Health"], fp, indent=4, separators=(',', ': '))
+with open('chara_det.json', 'w') as fp:
+    json.dump(chara_det["Health"], fp, indent=4, separators=(',', ': '))
 
 
 

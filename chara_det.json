@@ -1,1 +1,10 @@
--3
+{
+    "name": "Amy",
+    "race": "Orc",
+    "Strength": "2",
+    "Intellegence": "2",
+    "Charasma": "2",
+    "dexetrity": "2",
+    "Constitution": "2",
+    "Health": 15
+}

@@ -5,3 +5,4 @@
 {'name': 'Gerth', 'race': 'Dwarf', 'Strength': '0', 'Intellegence': '0', 'Charasma': '8', 'dexetrity': '1', 'Constitution': '0', 'Health': 15}
 {'name': 'Test', 'race': 'Orc', 'Strength': '2', 'Intellegence': '2', 'Charasma': '2', 'dexetrity': '2', 'Constitution': '2', 'Health': 15}
 {'name': 'John', 'race': 'Elf', 'Strength': '2', 'Intellegence': '2', 'Charasma': '2', 'dexetrity': '2', 'Constitution': '2', 'Health': 15}
+{'name': 'Amy', 'race': 'Orc', 'Strength': '2', 'Intellegence': '2', 'Charasma': '2', 'dexetrity': '2', 'Constitution': '2', 'Health': 15}
