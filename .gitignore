@@ -1,0 +1,4 @@
+#make it not committ updates to past_char.txt, save.text and chara_det.json
+.past_char.txt
+.save.txt
+.chara_det.json

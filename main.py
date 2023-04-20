@@ -89,6 +89,7 @@ if response == "attack":
         roll = char_funcs.d20()
         enemyTurn(roll)
         sleep(3)
+        break
     #update health in json file
     with open('chara_det.json', 'w') as fp:
         json.dump(chara_det["Health"], fp, indent=4, separators=(',', ': '))
