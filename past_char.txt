@@ -1,7 +1,0 @@
-{'name': 'Cool', 'race': 'Elf', 'Strength': '2', 'Intellegence': '2', 'Charasma': '2', 'dexetrity': '2', 'Constitution': '2', 'Health': 15}
-{'name': 'Fuck', 'race': 'Elf', 'Strength': '2', 'Intellegence': '2', 'Charasma': '2', 'dexetrity': '2', 'Constitution': '2', 'Health': 15}
-{'name': 'Wahoo', 'race': 'Dragonborn', 'Strength': '4', 'Intellegence': '4', 'Charasma': '2', 'dexetrity': '0', 'Constitution': '0', 'Health': 15}
-{'name': 'Cool Dude', 'race': 'Dwarf', 'Strength': '2', 'Intellegence': '1', 'Charasma': '4', 'dexetrity': '3', 'Constitution': 0, 'Health': 15}
-{'name': 'Gerth', 'race': 'Dwarf', 'Strength': '0', 'Intellegence': '0', 'Charasma': '8', 'dexetrity': '1', 'Constitution': '0', 'Health': 15}
-{'name': 'Test', 'race': 'Orc', 'Strength': '2', 'Intellegence': '2', 'Charasma': '2', 'dexetrity': '2', 'Constitution': '2', 'Health': 15}
-{'name': 'John', 'race': 'Elf', 'Strength': '2', 'Intellegence': '2', 'Charasma': '2', 'dexetrity': '2', 'Constitution': '2', 'Health': 15}
