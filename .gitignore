@@ -1,7 +1,5 @@
 #make it not committ updates to past_char.txt, save.text and chara_det.json
-git rm --cached past_char.txt
-git rm --cached save.txt
-git rm --cached chara_det.json
-.past_char.txt
-.save.txt
-.chara_det.json
+past_char.txt
+save.txt
+chara_det.json
+logs/*.txt
