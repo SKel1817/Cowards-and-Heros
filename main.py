@@ -4,6 +4,7 @@ from time import sleep
 import inventory
 import char_funcs
 from make_character import make_character
+from map import move
 import json
 import requests
 print("Welcome to the game")
@@ -103,6 +104,7 @@ elif response == "flee":
     print("you have fled")
     with open('save.txt', 'a') as f:
         f.write("----you have fled----\n")
+        move() #this works now
 else:
     print("Invalid response, get good")
     #update health in json file
