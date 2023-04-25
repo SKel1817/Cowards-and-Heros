@@ -72,5 +72,9 @@ def move():
             print("You did not enter a valid direction")
             grid = map[i][j]
         if j == 9:
-            i += 1
-            print("you have reached the end of coloum!, moving to next row")
+            if i == 4:
+                print("You have reached the end of the map")
+                break
+            else:
+                i += 1
+                print("you have reached the end of coloum!, moving to next row")
