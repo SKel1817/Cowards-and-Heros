@@ -42,7 +42,7 @@ def d4():
 
 # enemy stats 
 def enemy_stats():
-    health = 25
+    health = 15
     strength = d10()
     intellegence = d10()
     charasma = d10()

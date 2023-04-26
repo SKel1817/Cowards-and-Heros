@@ -8,13 +8,58 @@ from map import move
 import json
 import requests
 print("Welcome to the game")
+load = input("Do you want to load a save? (y/n) ")
+if load == "y":
+    #list the saves
+    #open past_char.txt and print the lines
+    with open('past_char.txt', 'r') as f:
+        #list only the name part of each line'
+        count = 1
+        for line in f:
+            #print(line)
+            #convert the string to a dictornary
+            stats = eval(line)
+            #make count a string
+            print(str(count) + ". " + stats['name'])
+            count += 1
+    #ask the user which save they want
+    save = input("Which save do you want to load? ")
+    print(save)
+    #open past_char.txt and get the last line
+    with open('past_char.txt', 'r') as f:
+        last_line = f.readlines()[int(save)-1]
+        #print(last_line)
+        #convert the string to a dictornary
+        stats = eval(last_line)
+        print(stats)
+elif load == "n":
+    #run make_character.py
+    stats = make_character()
+else:
+    print("invaild input, get good")
+    exit()
+        
+    
 with open('save.txt', 'a') as f:
     f.write("\n")
     f.write("-------Start of Game-------")
     f.write("\n")
-#run make_character.py
-stats = make_character()
+def update():
+    #update chara_det.json with the stats from make_character/load
+    with open('chara_det.json', 'w') as fp:
+        #append to json
+        json.dump(stats, fp, indent=4, separators=(',', ': '))
+# def save():
+#     # a function that takes the current stats in chara_det.json and overwrites the corrsponding save in past_char.txt
+#     with open('chara_det.json', 'r') as f:
+#         #convert the string to a dictornary
+#         stats = eval(f.read())
+#     with open('past_chara.txt', 'w') as f:
+#         #overwrite the save with the new stats
+#         last_line = f.readlines()[int(save)-1]
+#         f.write(str(stats))
 
+update()
 #get the chara_dets dictornary from the make_character function
 #print(stats)
 #okay actual story now
@@ -45,6 +90,7 @@ def playerTurn(roll):
             f.write(str(chara_det['name']) + " turn:")
             f.write("Successful hit, you hit the enemy " + str(enemy['Health']))
             f.write("\n")
+        update()
     else:
         print("you missed")
         print("you, " + str(chara_det['name']) + " have " + str(chara_det['Health']) + " health")
@@ -53,6 +99,7 @@ def playerTurn(roll):
             f.write(str(chara_det['name']) + " turn:")
             f.write("failed hit, you failed to hit the enemy, it's health is " + str(enemy['Health']))
             f.write("\n")
+        update()
 def enemyTurn(roll):
     print("\n-----ENEMY TURN-----")
     counter = 0
@@ -66,6 +113,7 @@ def enemyTurn(roll):
             f.write("Enemy turn:")
             f.write("Successful hit, the enemy hit you, your remaing health is" + str(chara_det['Health']))
             f.write("\n")
+        update()
     else:
         print("the enemy missed")
         print("you, " + str(chara_det['name']) + " have " + str(chara_det['Health']) + " health")
@@ -75,6 +123,7 @@ def enemyTurn(roll):
             f.write("Enemy turn:")
             f.write("failed hit, the enemy failed to hit you, it's health is" + str(enemy['Health']))
             f.write("\n")
+        update()
 
 print("you are now in combat (congrats)")
 print("you have " + str(stats['Health']) + " health")
@@ -107,9 +156,6 @@ elif response == "flee":
         move() #this works now
 else:
     print("Invalid response, get good")
-    #update health in json file
-with open('chara_det.json', 'w') as fp:
-    json.dump(chara_det["Health"], fp, indent=4, separators=(',', ': '))
 
 
 
