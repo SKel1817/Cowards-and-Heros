@@ -7,7 +7,7 @@ from make_character import make_character
 from map import move
 import json
 import requests
-print("Welcome to the game")
+print("Welcome to the COWARDS and HEROES")
 load = input("Do you want to load a save? (y/n) ")
 if load == "y":
     #list the saves
@@ -75,6 +75,10 @@ weapons = inventory.weapons
 potions = inventory.potions
 kits = inventory.kits
 enemy = char_funcs.enemy_stats()
+
+print("Welcome to COWARDS and HEROES\n here the rules are simple, adventure until you drop dead and yeah you might want to move a little to the left.")
+print("You are " + str(chara_det['name']) + " and you have " + str(chara_det['Health']) + " health")
+input("When you are ready to begin press enter")
 
 
 def playerTurn(roll):
