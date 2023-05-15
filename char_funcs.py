@@ -63,7 +63,41 @@ def load_save():
             stats = eval(last_line)
             print(stats)
             return stats
-        
+
+def combat(stats):
+    print("you are now in combat (congrats)")
+    print("you have " + str(stats['Health']) + " health")
+    response = input("What do you want to do? [attack or flee]").lower()
+    if response == "attack":
+        while enemy['Health'] > 0 or stats['Health'] > 0:
+            roll = d20()
+            playerTurn(roll, stats)
+            sleep(3)
+            roll = d20()
+            enemyTurn(roll, stats)
+            sleep(3)
+            #check enemy and player health
+            if enemy['Health'] < 0:
+                print("You have defeated the enemy")
+                with open('save.txt', 'a') as f:
+                    f.write("----you have defeated the enemy----\n")
+                break
+            elif stats['Health'] < 0:
+                print("You have died")
+                with open('save.txt', 'a') as f:
+                    f.write("----You have died----\n")
+                break
+            else:
+                continue
+    elif response == "flee":
+        print("you have fled")
+        with open('save.txt', 'a') as f:
+            f.write("----you have fled----\n")
+            map.move() #this works now
+    else:
+        print("Invalid response, get good")     
+
+
 # enemy stats 
 def enemy_stats():
     health = 15
