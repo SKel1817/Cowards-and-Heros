@@ -2,24 +2,16 @@
 #the user will be able to move around the map and enter combat with enemies
 #the user will be able to save their progress and load it later
 #the user will be able to find objects and also flee if they can recall the ext, like a blind map
-
+import char_funcs as fun
 #make the 10x10 array
-def move():
+def move(stats):
     map = [
-        [0,1,2,3,4,5,6,7,8,9],
-        [10,11,12,13,14,15,16,17,18,19],
-        [20,21,22,23,24,25,26,27,28,29],
-        [30,31,32,33,34,35,36,37,38,39],
-        [40,41,42,43,44,45,46,47,48,49]
+        [0,0,1,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0],
         ]
-    #this is bad array
-    #snakes down so moves left to right, then down then right to left
-    #run for loop so it runs like a grid
-    # for i in range(0,4):
-    #     grid = map[i]
-    #     print(str(grid)+"\n")
-    #     i+=1
-
 
     #working on movment, user will use "l" for left and "r" for right. 
     #this willl be a loop that moves us through the list variable map and will check to see if the current number is 0 or 1 and if its 1 will print out "yes"
@@ -34,10 +26,12 @@ def move():
                 print("You are at the end of the row")
                 grid = map[i][j]
                 print(str(grid))
+                return grid
             else:
                 j = j + 1
                 grid = map[i][j]
                 print("Moving Right: " + str(grid))
+                
         elif movment == 'a':
             if j == 0:
                 print("You are at the start of the row")
@@ -67,7 +61,7 @@ def move():
                 print("Moving Down: " + str(grid))
         elif movment == 'e':
             print("You have exited the map")
-            break    
+            break
         else:
             print("You did not enter a valid direction")
             grid = map[i][j]
@@ -78,3 +72,10 @@ def move():
             else:
                 i += 1
                 print("you have reached the end of coloum!, moving to next row")
+
+        # if grid == 1 enter combat
+        if grid == 1:
+            fun.combat(stats)
+            break
+        else:
+            pass
