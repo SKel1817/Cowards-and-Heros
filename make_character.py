@@ -5,12 +5,18 @@ import json
 # making the charactor
 # so this is lists, its kinda a jumble but just cause I need it to be
 def make_character():
-    print("welcome! This is a fun little fighter game that i will work from on tommorrow")
+    print("MAKE YOUR CHARACTOR\n")
     races = ["Orc", "Elf", "Wood Elf", "Dark Elf", "Dragonborn", "Dwarf", "Human", "Goblin"]
     name = input("What is your Charater's Name? ").title()
     print(races)
-    #insert if statment or something to insure a actual race is being entered
-    race = input("Pick a race from the list above and enter it: ").title()
+    while True:
+        #insert if statment or something to insure a actual race is being entered
+        race = input("Pick a race from the list above and enter it: ").title()
+        #make sure they entered the an option from the races list
+        if race in races:
+            break
+        else: 
+            print("invalid option please try again")
     #starting health value
     health = 15
     # making the stats for charactor
@@ -27,25 +33,30 @@ def make_character():
         #make a try expect statment with a for loop that makes sure its a valid number and adds it to the proper stat
         for i in range(len(options)):
             stat = input("How many points for " + options[i]  + ": ")
-            if int(stat) > 0 and int(stat) <= points:
-                points = points - int(stat)
-                print("points left: " + str(points))
-                #save into stat into correct variable
-                var[i] = stat
-                i+=1
-            else:
-                print("invaild number your " + stat + " is 0")
+            try:
+                if int(stat) >= 0 and int(stat) <= points:
+                    points = points - int(stat)
+                    print("points left: " + str(points))
+                    #update the variable number in var list
+                    var[i] = int(stat)
+                    
+                    i+=1
+                else:
+                    print("invaild number you get a 0" )
+                    stat = 0
+            except ValueError:
+                print("invaild input")
                 stat = 0
     
-    # dictornary full of all the dets
+        # dictornary full of all the dets
         chara_det = {
             'name': name,
             'race': race,
-            'Strength': strength,
-            "Intellegence": intel,
-            "Charasma": charsama,
-            "dexetrity": dex,
-            "Constitution":conc,
+            'Strength': var[0],
+            "Intellegence": var[1],
+            "Charasma": var[2],
+            "dexetrity": var[3],
+            "Constitution": var[4],
             "Health": health,
             }
         #no you can't have save and load yet need to have a save and load function and the game 

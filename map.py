@@ -3,10 +3,15 @@
 #the user will be able to save their progress and load it later
 #the user will be able to find objects and also flee if they can recall the ext, like a blind map
 import char_funcs as fun
+import inventory as inv
+import random
+from rich import print
+from rich.traceback import install
+install()
 #make the 10x10 array
 def move(stats):
     map = [
-        [0,0,1,0,0,0,0,0,0,0],
+        [0,2,0,0,0,1,0,0,0,0],
         [0,0,0,0,0,0,0,0,0,0],
         [0,0,0,0,0,0,0,0,0,0],
         [0,0,0,0,0,0,0,0,0,0],
@@ -68,14 +73,85 @@ def move(stats):
         if j == 9:
             if i == 4:
                 print("You have reached the end of the map")
-                break
+                continue
             else:
                 i += 1
                 print("you have reached the end of coloum!, moving to next row")
 
         # if grid == 1 enter combat
         if grid == 1:
+            map[i][j] = 0
             fun.combat(stats)
-            break
+            continue
         else:
             pass
+        # if grid == 2 enter loot
+        if grid == 2:
+            map[i][j] = 0
+            inv.loot()
+            continue
+
+
+def flee():
+    escape_map = [
+        [0,0,0],
+        [0,0,0],
+        [0,0,1]
+    ]
+    i = 0
+    j = 0
+    grid = escape_map[i][j]
+    while True:
+        movment = input("Which way would you like to go? (w,a,s,d): ")
+        if movment == 'd':
+            if j == 2:
+                print("ows that's the right wall")
+                grid = escape_map[i][j]
+                print(str(grid))
+            else:
+                j = j + 1
+                print(i)
+                print(j)
+                grid = escape_map[i][j]
+                print("Moving Right: " + str(grid))
+                
+        elif movment == 'a':
+            if j == 0:
+                print("ow that's the left wall")
+                grid = escape_map[i][j]
+                print(str(grid))
+            else:
+                j = j - 1
+                grid = escape_map[i][j]
+                print("Moving Left: " + str(grid))
+        elif movment == 'w':
+            if i == 0:
+                print("careful along the upper wall")
+                grid = escape_map[i][j]
+                print(str(grid))
+            else:
+                i = i - 1
+                grid = escape_map[i][j]
+                print("Moving Up: " + str(grid))
+        elif movment == 's':
+            if i == 2:
+                print("Careful along the wall there!")
+                grid = escape_map[i][j]
+                print(str(grid))
+            else:
+                i = i + 1
+                grid = escape_map[i][j]
+                print("Moving Down: " + str(grid))
+        else:
+            print("bro")
+            grid = escape_map[i][j]
+        if j == 2:
+            if i == 2:
+                grid = escape_map[i][j]
+                print("that's the corner")
+            else:
+                grid = escape_map[i][j]
+                print("OW! right wall")
+        if grid == 1:
+            print("You have escaped!")
+            break

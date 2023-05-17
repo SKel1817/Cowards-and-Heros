@@ -2,7 +2,11 @@
 import random
 from time import sleep
 import json
-
+import map 
+from rich import print
+from rich.traceback import install
+from make_character import make_character
+install()
 # dice rolls
 def d20():
     #random number from 1-20
@@ -44,63 +48,77 @@ def d4():
 def load_save():
         with open('past_char.txt', 'r') as f:
             #list only the name part of each line'
-            count = 1
+            count = 0
             for line in f:
+                count += 1
                 #print(line)
                 #convert the string to a dictornary
                 stats = eval(line)
                 #make count a string
                 print(str(count) + ". " + stats['name'])
-                count += 1
-        #ask the user which save they want
-        save = input("Which save do you want to load? ")
-        print(save)
-        #open past_char.txt and get the last line
-        with open('past_char.txt', 'r') as f:
-            last_line = f.readlines()[int(save)-1]
-            #print(last_line)
-            #convert the string to a dictornary
-            stats = eval(last_line)
-            print(stats)
-            return stats
+        if count == 0:
+            print("There are no saves")
+            successful = False
+            return successful
+        else:
+            #ask the user which save they want
+            while True:
+                try:
+                    save = input("Which save do you want to load? ")
+                    print(save)
+                    #open past_char.txt and get the last line
+                    with open('past_char.txt', 'r') as f:
+                        last_line = f.readlines()[int(save)-1]
+                        #print(last_line)
+                        #convert the string to a dictornary
+                        stats = eval(last_line)
+                        print(stats)
+                        return stats
+                except ValueError:
+                    print("Invalid input, try again")
 
 def combat(stats):
     print("you are now in combat (congrats)")
     print("you have " + str(stats['Health']) + " health")
-    response = input("What do you want to do? [attack or flee]").lower()
-    if response == "attack":
-        while enemy['Health'] > 0 or stats['Health'] > 0:
-            roll = d20()
-            playerTurn(roll, stats)
-            sleep(3)
-            roll = d20()
-            enemyTurn(roll, stats)
-            sleep(3)
-            #check enemy and player health
-            if enemy['Health'] < 0:
-                print("You have defeated the enemy")
-                with open('save.txt', 'a') as f:
-                    f.write("----you have defeated the enemy----\n")
-                break
-            elif stats['Health'] < 0:
-                print("You have died")
-                with open('save.txt', 'a') as f:
-                    f.write("----You have died----\n")
-                break
-            else:
-                continue
-    elif response == "flee":
-        print("you have fled")
-        with open('save.txt', 'a') as f:
-            f.write("----you have fled----\n")
-            map.move() #this works now
-    else:
-        print("Invalid response, get good")     
+    combat = True
+    while combat == True:
+        response = input("What do you want to do? [attack or flee]").lower()
+        if response == "attack":
+            while enemy['Health'] > 0 or stats['Health'] > 0:
+                roll = d20()
+                playerTurn(roll, stats)
+                sleep(3)
+                roll = d20()
+                enemyTurn(roll, stats)
+                sleep(3)
+                #check enemy and player health
+                if enemy['Health'] < 0:
+                    print("You have defeated the enemy")
+                    with open('save.txt', 'a') as f:
+                        f.write("----you have defeated the enemy----\n")
+                    combat = False
+                    break
+                elif stats['Health'] < 0:
+                    print("You have died")
+                    with open('save.txt', 'a') as f:
+                        f.write("----You have died----\n")
+                    combat = False
+                    break
+                else:
+                    continue
+        elif response == "flee":
+            with open('save.txt', 'a') as f:
+                f.write("----you have fled----\n")
+                map.flee() #this works now
+                combat = False
+        else:
+            print("Invalid response, get good") 
+            continue
 
 
 # enemy stats 
 def enemy_stats():
-    health = 15
+    health = 5
     strength = d10()
     intellegence = d10()
     charasma = d10()
@@ -120,7 +138,6 @@ def update(stats):
 
 def playerTurn(roll, stats):
     print("\n-----YOUR TURN-----")
-    counter = 0
     if roll >= 10:
         print("you hit the enemy")
         damage = d6()
