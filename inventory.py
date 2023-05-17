@@ -22,3 +22,12 @@ class Inventory:
         print("You lost an item")
     def list_inv(self):
         print("You have....")
+
+class loot:
+    def __int__(self, weapons, potions, kits, items):
+        self.weapons = weapons
+        self.potions = potions
+        self.kits = kits
+        self.items = items
+    def list():
+        print("You have found...")

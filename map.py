@@ -17,7 +17,7 @@ def move(stats):
     #this willl be a loop that moves us through the list variable map and will check to see if the current number is 0 or 1 and if its 1 will print out "yes"
     i = 0
     j = 0
-
+    moves = {'w':[1,0], 'a':[0,-1], 's':[-1,0], 'd':[0,1]}
     grid = map[i][j]
     while True:
         movment = input("Which way would you like to go? (w,a,s,d) or (e) to exit:")

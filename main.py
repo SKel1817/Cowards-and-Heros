@@ -4,7 +4,6 @@ import inventory
 import char_funcs as fun
 from make_character import make_character
 import map as m
-import json
 #welcome
 print("Welcome to the COWARDS and HEROES")
 
