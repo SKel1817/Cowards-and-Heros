@@ -13,7 +13,7 @@ items = []
 chest = ['sword', 'health']
 
 #what the character has, can be added to by using class inventory
-char_weap = []
+char_weap = ["fists"]
 char_pot = []
 char_kit = []
 char_items = []
@@ -24,7 +24,18 @@ def lose_item():
     print("You lost an item")
 def list_inv():
     print("You have....")
-
+    #print inventory
+    for item in inventory:
+        print(item)
+def list_weap():
+    print("You have....")
+    #print inventory
+    for item in char_weap:
+        print(item)
+def list_potion():
+    print("You have....")
+    for item in char_pot:
+        print(item)
 def loot():
     print("You have found a chest")
     print("You have found a  " + chest[0] + " and a " + chest[1] + " potion")

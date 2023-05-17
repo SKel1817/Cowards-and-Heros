@@ -10,6 +10,8 @@ from rich.traceback import install
 install()
 #welcome
 print("Welcome to the COWARDS and HEROES")
+
+#make a function or something idk 
 while True:
     #load or make new
     load = input("Do you want to load a save? (y/n) ")

@@ -3,6 +3,7 @@ import random
 from time import sleep
 import json
 import map 
+import inventory
 from rich import print
 from rich.traceback import install
 from make_character import make_character
@@ -76,12 +77,31 @@ def load_save():
                         return stats
                 except ValueError:
                     print("Invalid input, try again")
+                    
+#this fucntion does work making it double if statment for now
+def alive(stats):
+    if enemy['Health'] <= 0:
+        print("You have defeated the enemy")
+        with open('save.txt', 'a') as f:
+            f.write("----you have defeated the enemy----\n")
+        combat = False
+        return combat
+    elif stats['Health'] <= 0:
+        print("You have died")
+        with open('save.txt', 'a') as f:
+            f.write("----You have died----\n")
+        combat = False
+        return combat
+    else:
+        combat = True
+        return combat
+    
 
 def combat(stats):
     print("you are now in combat (congrats)")
     print("you have " + str(stats['Health']) + " health")
-    combat = True
-    while combat == True:
+    run = True
+    while run == True:
         response = input("What do you want to do? [attack or flee]").lower()
         if response == "attack":
             while enemy['Health'] > 0 or stats['Health'] > 0:
@@ -91,26 +111,28 @@ def combat(stats):
                 roll = d20()
                 enemyTurn(roll, stats)
                 sleep(3)
-                #check enemy and player health
-                if enemy['Health'] < 0:
+                #this doesnt work right now, it will end but only after everyones turns finish so you can end with negetive heatlh even if you won
+                if enemy['Health'] <= 0:
                     print("You have defeated the enemy")
                     with open('save.txt', 'a') as f:
                         f.write("----you have defeated the enemy----\n")
-                    combat = False
+                    run = False
                     break
-                elif stats['Health'] < 0:
+                elif stats['Health'] <= 0:
                     print("You have died")
                     with open('save.txt', 'a') as f:
                         f.write("----You have died----\n")
-                    combat = False
+                    run = False
                     break
                 else:
+                    #combat = True
                     continue
         elif response == "flee":
             with open('save.txt', 'a') as f:
                 f.write("----you have fled----\n")
                 map.flee() #this works now
-                combat = False
+            run = False
+            break
         else:
             print("Invalid response, get good") 
             continue
@@ -138,26 +160,53 @@ def update(stats):
 
 def playerTurn(roll, stats):
     print("\n-----YOUR TURN-----")
-    if roll >= 10:
-        print("you hit the enemy")
-        damage = d6()
-        enemy['Health'] = enemy['Health'] - damage
-        print("The enemy has " + str(enemy['Health']) + " health remaining")
-        #write this to a txt so it can be accessed as a save point for user
-        with open('save.txt', 'a') as f:
-            f.write(str(stats['name']) + " turn:")
-            f.write("Successful hit, you hit the enemy " + str(enemy['Health']))
-            f.write("\n")
-        update(stats)
+    choice = input("Would you like to attack or use a potion? [attack or potion]").lower()
+    if choice == "attack":
+        if roll >= 10:
+            print("you can hit the enemy")
+            print(" what weapon do you want to use?")
+            #list character inventory
+            inventory.list_weap()
+            weapon = input("enter name of weapon here: ").lower()
+            #get the weapon stats
+            dict = inventory.weapons
+            try:
+            #get the weapon stats
+                damage = dict[weapon]
+            except KeyError:
+                print("invalid weapon, you use your fists")
+                damage = dict["fists"]
+            print("you hit the enemy for " + str(damage) + " damage")
+            enemy['Health'] = enemy['Health'] - damage
+            print("The enemy has " + str(enemy['Health']) + " health remaining")
+            #write this to a txt so it can be accessed as a save point for user
+            with open('save.txt', 'a') as f:
+                f.write(str(stats['name']) + " turn:")
+                f.write("Successful hit, you hit the enemy " + str(enemy['Health']))
+                f.write("\n")
+            update(stats)
+        else:
+            print("you missed")
+            print("you, " + str(stats['name']) + " have " + str(stats['Health']) + " health")
+            #write this to a txt so it can be accessed as a save point for user
+            with open('save.txt', 'a') as f:
+                f.write(str(stats['name']) + " turn:")
+                f.write("failed hit, you failed to hit the enemy, it's health is " + str(enemy['Health']))
+                f.write("\n")
+            update(stats)
+    elif choice == "potion":
+        inventory.list_potion()
+        potion = input("which potion do you want to use?").lower()
+        potion_dict = inventory.potions
+        try :
+            print("you have chosen to use a " + potion)
+            stats['Health'] = stats['Health'] + potion_dict[potion]
+            print("you, " + str(stats['name']) + " have " + str(stats['Health']) + " health")
+        except KeyError:
+            print("you don't have that potion")
     else:
-        print("you missed")
-        print("you, " + str(stats['name']) + " have " + str(stats['Health']) + " health")
-        #write this to a txt so it can be accessed as a save point for user
-        with open('save.txt', 'a') as f:
-            f.write(str(stats['name']) + " turn:")
-            f.write("failed hit, you failed to hit the enemy, it's health is " + str(enemy['Health']))
-            f.write("\n")
-        update(stats)
+        print("invalid response, you lose your turn. do better")
+
 
 def enemyTurn(roll, stats):
     print("\n-----ENEMY TURN-----")
