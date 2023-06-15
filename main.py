@@ -13,7 +13,7 @@ print("Welcome to the COWARDS and HEROES")
 
 #make a function or something idk 
 while True:
-    #load or make new
+    #load or make newn
     load = input("Do you want to load a save? (y/n) ")
     if load == "y":
         #run load_save()

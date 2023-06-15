@@ -15,7 +15,7 @@ def move(stats):
         [0,0,0,0,0,0,0,0,0,0],
         [0,0,0,0,0,0,0,0,0,0],
         [0,0,0,0,0,0,0,0,0,0],
-        [0,0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,3],
         ]
 
     #working on movment, user will use "l" for left and "r" for right. 
@@ -67,6 +67,8 @@ def move(stats):
         elif movment == 'e':
             print("You have exited the map")
             break
+        elif movment == 'q':
+            inv.list_inv()
         else:
             print("You did not enter a valid direction")
             grid = map[i][j]
@@ -77,7 +79,6 @@ def move(stats):
             else:
                 i += 1
                 print("you have reached the end of coloum!, moving to next row")
-
         # if grid == 1 enter combat
         if grid == 1:
             map[i][j] = 0
@@ -89,6 +90,10 @@ def move(stats):
         if grid == 2:
             map[i][j] = 0
             inv.loot()
+            continue
+        if grid == 3:
+            map[i][j] = 0
+            fun.end()
             continue
 
 

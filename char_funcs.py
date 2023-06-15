@@ -9,6 +9,11 @@ from rich.traceback import install
 from make_character import make_character
 install()
 # dice rolls
+def end():
+    print("\n\nyou have completed the level congrats\n\n")
+    level += 1
+    return level
+
 def d20():
     #random number from 1-20
     roll_d20 = random.randint(1, 20)
@@ -78,74 +83,46 @@ def load_save():
                 except ValueError:
                     print("Invalid input, try again")
                     
-#this fucntion does work making it double if statment for now
-def alive(stats):
-    if enemy['Health'] <= 0:
-        print("You have defeated the enemy")
-        with open('save.txt', 'a') as f:
-            f.write("----you have defeated the enemy----\n")
-        combat = False
-        return combat
-    elif stats['Health'] <= 0:
-        print("You have died")
-        with open('save.txt', 'a') as f:
-            f.write("----You have died----\n")
-        combat = False
-        return combat
-    else:
-        combat = True
-        return combat
-    
 
 def combat(stats):
     print("you are now in combat (congrats)")
     print("you have " + str(stats['Health']) + " health")
-    run = True
-    while run == True:
-        response = input("What do you want to do? [attack or flee]").lower()
+    response = input("What do you want to do? [attack or flee]").lower()
+    while enemy['Health'] > 0 and stats['Health'] > 0:
         if response == "attack":
-            while enemy['Health'] > 0 or stats['Health'] > 0:
-                roll = d20()
-                playerTurn(roll, stats)
-                sleep(3)
-                roll = d20()
-                enemyTurn(roll, stats)
-                sleep(3)
-                #this doesnt work right now, it will end but only after everyones turns finish so you can end with negetive heatlh even if you won
-                if enemy['Health'] <= 0:
-                    print("You have defeated the enemy")
-                    with open('save.txt', 'a') as f:
-                        f.write("----you have defeated the enemy----\n")
-                    run = False
-                    break
-                elif stats['Health'] <= 0:
-                    print("You have died")
-                    with open('save.txt', 'a') as f:
-                        f.write("----You have died----\n")
-                    run = False
-                    break
-                else:
-                    #combat = True
-                    continue
+            roll = d20() 
+            playerTurn(roll, stats)
+            sleep(3)
+            roll = d20()
+            enemyTurn(roll, stats)
+            sleep(3)
         elif response == "flee":
             with open('save.txt', 'a') as f:
                 f.write("----you have fled----\n")
                 map.flee() #this works now
-            run = False
             break
         else:
-            print("Invalid response, get good") 
+            print("Invalid response, off to combat you go")
+            response = "attack" 
             continue
+    if enemy['Health'] <= 0:
+        print("You have defeated the enemy")
+        with open('save.txt', 'a') as f:
+            f.write("----you have defeated the enemy----\n")
+    elif stats['Health'] <= 0:
+        print("You have died")
+        with open('save.txt', 'a') as f:
+            f.write("----You have died----\n")
 
 
 # enemy stats 
 def enemy_stats():
-    health = 5
-    strength = d10()
-    intellegence = d10()
-    charasma = d10()
-    dex = d10()
-    conc = d10()
+    strength = d4()
+    intellegence = d4()
+    charasma = d4()
+    dex = d4()
+    conc = d4()
+    health = 15 + conc 
     enemy = {'Health': health, 'strength': strength, 'intellegence': intellegence, 'charasma': charasma, 'dex': dex, 'conc': conc}
     return enemy
 
@@ -172,10 +149,10 @@ def playerTurn(roll, stats):
             dict = inventory.weapons
             try:
             #get the weapon stats
-                damage = dict[weapon]
+                damage = dict[weapon] + stats['Strength']
             except KeyError:
                 print("invalid weapon, you use your fists")
-                damage = dict["fists"]
+                damage = dict["fists"] + stats['Strength']
             print("you hit the enemy for " + str(damage) + " damage")
             enemy['Health'] = enemy['Health'] - damage
             print("The enemy has " + str(enemy['Health']) + " health remaining")
@@ -213,7 +190,7 @@ def enemyTurn(roll, stats):
     counter = 0
     if roll >= 10:
         print("the enemy hit you")
-        damage = d6()
+        damage = d6() + enemy['strength']
         stats['Health'] = stats['Health'] - damage
         print("you, " + str(stats['name']) + " have " + str(stats['Health']) + " health remaining")
         #write this to a txt so it can be accessed as a save point for user
