@@ -11,11 +11,11 @@ install()
 #make the 10x10 array
 def move(stats):
     map = [
-        [0,2,0,0,0,1,0,0,0,0],
-        [0,0,0,0,0,0,0,0,0,0],
-        [0,0,0,0,0,0,0,0,0,0],
-        [0,0,0,0,0,0,0,0,0,0],
-        [0,0,0,0,0,0,0,0,0,3],
+        [0,2,0,0,0,1,0,0,1,0],
+        [0,1,0,0,0,2,0,0,0,0],
+        [0,0,0,0,1,0,0,1,0,2],
+        [0,0,1,0,0,0,0,0,1,1],
+        [2,0,0,0,1,0,0,0,1,3],
         ]
 
     #working on movment, user will use "l" for left and "r" for right. 
@@ -24,6 +24,7 @@ def move(stats):
     j = 0
     moves = {'w':[1,0], 'a':[0,-1], 's':[-1,0], 'd':[0,1]}
     grid = map[i][j]
+    count = 0
     while True:
         movment = input("Which way would you like to go? (w,a,s,d) or (e) to exit:")
         if movment == 'd':
@@ -83,6 +84,7 @@ def move(stats):
         if grid == 1:
             map[i][j] = 0
             fun.combat(stats)
+            count +=1
             continue
         else:
             pass

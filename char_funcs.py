@@ -11,8 +11,8 @@ install()
 # dice rolls
 def end():
     print("\n\nyou have completed the level congrats\n\n")
-    level += 1
-    return level
+    #level += 1
+    #return level
 
 def d20():
     #random number from 1-20
@@ -116,13 +116,13 @@ def combat(stats):
 
 
 # enemy stats 
-def enemy_stats():
+def enemy_stats(count = 0):
     strength = d4()
     intellegence = d4()
     charasma = d4()
     dex = d4()
     conc = d4()
-    health = 15 + conc 
+    health = 15 + conc + (count * 2)
     enemy = {'Health': health, 'strength': strength, 'intellegence': intellegence, 'charasma': charasma, 'dex': dex, 'conc': conc}
     return enemy
 

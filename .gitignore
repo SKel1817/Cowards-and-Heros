@@ -4,3 +4,6 @@ save.txt
 chara_det.json
 logs/*.txt
 holderfile.txt
+*_pycache_*
+_pycache_/*
+
