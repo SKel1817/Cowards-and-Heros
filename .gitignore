@@ -6,4 +6,5 @@ logs/*.txt
 holderfile.txt
 *_pycache_*
 _pycache_/*
+venv/
 
